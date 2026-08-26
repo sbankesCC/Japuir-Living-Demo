@@ -26,10 +26,10 @@ Open `http://localhost:8080/control-tower` (direct routes are supported by Nginx
 
 ## Data and implementation notes
 
-- Development source workbook: `C:\Users\sbankes\Downloads\jaipur-normalized-demo-data (1).xlsx`.
-- Run `npm run extract:data` only when refreshing the committed JSON in `src/data/generated/workbook.json`; Excel is never parsed in the browser or container.
+- Runtime source: `src/data/generated/controlTowerV2.json`, copied from `C:\Users\sbankes\Downloads\jaipur-control-tower-v2-demo-data.json`.
+- The v2 audit workbook is reference-only and is never parsed in the browser or container.
 - Stack: React, Vite, TypeScript, React Router, CSS variables, Lucide React, Docker, and Nginx.
-- The source model is anchored to 2026-08-13. Dates are rebased in memory by the whole-calendar-day difference between that date and today; source JSON remains unchanged.
+- The source model is anchored to the JSON's `meta.sourceAsOfDate`. Dates are rebased in memory by the whole-calendar-day difference between that date and today; source JSON remains unchanged.
 - Decision selections and approvals exist only in React session state. They do not call an API, alter dashboard KPIs, or persist.
 - No backend, database, authentication, live integrations, AI service, automated-test stack, linting, monitoring, or deployment pipeline is included.
 
@@ -37,5 +37,5 @@ Open `http://localhost:8080/control-tower` (direct routes are supported by Nginx
 
 - `npm run build` passes.
 - Confirm the header’s Mock Data badge and current as-of date.
-- Exercise every global filter, drill into a milestone/issue/vendor/shipment, select a queue row, and choose a decision option.
+- Exercise every global filter, KPI, milestone count, delay driver, queue action, vendor, and shipment drilldown; then confirm a suggested action.
 - Use Reset Demo to restore the initial state.
