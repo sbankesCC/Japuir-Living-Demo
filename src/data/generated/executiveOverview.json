@@ -1,0 +1,435 @@
+{
+  "meta": {
+    "ApplicationName": "Executive Overview",
+    "BuiltFor": "Jaipur Living",
+    "MockData": true,
+    "DemoOnly": true,
+    "DataAsOfDate": "2026-08-25",
+    "HistoricalPeriod": "February–July 2026",
+    "ForecastPerformanceGrain": "Actual Month × Channel using one consistent two-month-lag forecast snapshot",
+    "OperationalDataFile": "jaipur-control-tower-v3-demo-data.json",
+    "PlanningDataFile": "ibp-workbench-demo-data.json"
+  },
+  "targets": {
+    "ABSkuInStockRatePct": {
+      "Value": 90,
+      "Source": "JLI Supply Chain RFP success metric"
+    },
+    "InventoryTurns": {
+      "Value": 2,
+      "Source": "JLI Supply Chain RFP success metric"
+    },
+    "ForecastBiasBandPct": {
+      "Lower": -5,
+      "Upper": 5,
+      "Source": "Proposed fictional demo threshold",
+      "ValidationStatus": "SME Validation Required"
+    }
+  },
+  "metricDefinitions": [
+    {
+      "MetricID": "METRIC-FORECAST-BIAS",
+      "MetricName": "Forecast Bias",
+      "Formula": "SUM(ForecastUnits - ActualUnits) / SUM(ActualUnits) * 100",
+      "Interpretation": "Positive is over-forecast; negative is under-forecast.",
+      "ValidationStatus": "SME Validation Required"
+    },
+    {
+      "MetricID": "METRIC-WAPE",
+      "MetricName": "Weighted Absolute Percentage Error",
+      "Formula": "SUM(ABS(ForecastUnits - ActualUnits)) / SUM(ActualUnits) * 100",
+      "Interpretation": "Lower is better.",
+      "ValidationStatus": "SME Validation Required"
+    },
+    {
+      "MetricID": "METRIC-AB-IN-STOCK",
+      "MetricName": "A/B SKU In-Stock Rate",
+      "Formula": "ABSkuInStockCount / ABSkuCount * 100",
+      "Interpretation": "Higher is better.",
+      "ValidationStatus": "Prototype definition"
+    },
+    {
+      "MetricID": "METRIC-INVENTORY-TURNS",
+      "MetricName": "Inventory Turns",
+      "Formula": "Trailing12MonthCOGS / AverageInventoryValue",
+      "Interpretation": "Compared with the RFP target of 2.0 or greater.",
+      "ValidationStatus": "Prototype definition"
+    },
+    {
+      "MetricID": "METRIC-ETA-STABILITY",
+      "MetricName": "ETA Stability",
+      "Formula": "ETAStablePOLines / ETAEligiblePOLines * 100",
+      "Interpretation": "Share of eligible PO lines whose customer-facing ETA remained within the demo tolerance.",
+      "ValidationStatus": "SME Validation Required"
+    }
+  ],
+  "forecastPerformance": [
+    {
+      "ActualMonthID": "2026-02",
+      "ActualMonthLabel": "February 2026",
+      "ChannelID": "CH-ECOMMERCE",
+      "ChannelName": "E-Commerce",
+      "ForecastSnapshotDate": "2025-12-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3700,
+      "ActualUnits": 3063,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-02",
+      "ActualMonthLabel": "February 2026",
+      "ChannelID": "CH-NATIONAL-ACCOUNTS",
+      "ChannelName": "National Accounts",
+      "ForecastSnapshotDate": "2025-12-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2900,
+      "ActualUnits": 2523,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-02",
+      "ActualMonthLabel": "February 2026",
+      "ChannelID": "CH-INDEPENDENT-RETAIL",
+      "ChannelName": "Independent Retail",
+      "ForecastSnapshotDate": "2025-12-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2000,
+      "ActualUnits": 1982,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-02",
+      "ActualMonthLabel": "February 2026",
+      "ChannelID": "CH-DESIGNER",
+      "ChannelName": "Designer",
+      "ForecastSnapshotDate": "2025-12-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1400,
+      "ActualUnits": 1441,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-03",
+      "ActualMonthLabel": "March 2026",
+      "ChannelID": "CH-ECOMMERCE",
+      "ChannelName": "E-Commerce",
+      "ForecastSnapshotDate": "2026-01-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3626,
+      "ActualUnits": 3085,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-03",
+      "ActualMonthLabel": "March 2026",
+      "ChannelID": "CH-NATIONAL-ACCOUNTS",
+      "ChannelName": "National Accounts",
+      "ForecastSnapshotDate": "2026-01-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2842,
+      "ActualUnits": 2541,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-03",
+      "ActualMonthLabel": "March 2026",
+      "ChannelID": "CH-INDEPENDENT-RETAIL",
+      "ChannelName": "Independent Retail",
+      "ForecastSnapshotDate": "2026-01-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1960,
+      "ActualUnits": 1996,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-03",
+      "ActualMonthLabel": "March 2026",
+      "ChannelID": "CH-DESIGNER",
+      "ChannelName": "Designer",
+      "ForecastSnapshotDate": "2026-01-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1372,
+      "ActualUnits": 1452,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-04",
+      "ActualMonthLabel": "April 2026",
+      "ChannelID": "CH-ECOMMERCE",
+      "ChannelName": "E-Commerce",
+      "ForecastSnapshotDate": "2026-02-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3774,
+      "ActualUnits": 3335,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-04",
+      "ActualMonthLabel": "April 2026",
+      "ChannelID": "CH-NATIONAL-ACCOUNTS",
+      "ChannelName": "National Accounts",
+      "ForecastSnapshotDate": "2026-02-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2958,
+      "ActualUnits": 2746,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-04",
+      "ActualMonthLabel": "April 2026",
+      "ChannelID": "CH-INDEPENDENT-RETAIL",
+      "ChannelName": "Independent Retail",
+      "ForecastSnapshotDate": "2026-02-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2040,
+      "ActualUnits": 2158,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-04",
+      "ActualMonthLabel": "April 2026",
+      "ChannelID": "CH-DESIGNER",
+      "ChannelName": "Designer",
+      "ForecastSnapshotDate": "2026-02-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1428,
+      "ActualUnits": 1569,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-05",
+      "ActualMonthLabel": "May 2026",
+      "ChannelID": "CH-ECOMMERCE",
+      "ChannelName": "E-Commerce",
+      "ForecastSnapshotDate": "2026-03-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3663,
+      "ActualUnits": 3435,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-05",
+      "ActualMonthLabel": "May 2026",
+      "ChannelID": "CH-NATIONAL-ACCOUNTS",
+      "ChannelName": "National Accounts",
+      "ForecastSnapshotDate": "2026-03-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2871,
+      "ActualUnits": 2829,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-05",
+      "ActualMonthLabel": "May 2026",
+      "ChannelID": "CH-INDEPENDENT-RETAIL",
+      "ChannelName": "Independent Retail",
+      "ForecastSnapshotDate": "2026-03-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1980,
+      "ActualUnits": 2222,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-05",
+      "ActualMonthLabel": "May 2026",
+      "ChannelID": "CH-DESIGNER",
+      "ChannelName": "Designer",
+      "ForecastSnapshotDate": "2026-03-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1386,
+      "ActualUnits": 1616,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-06",
+      "ActualMonthLabel": "June 2026",
+      "ChannelID": "CH-ECOMMERCE",
+      "ChannelName": "E-Commerce",
+      "ForecastSnapshotDate": "2026-04-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3737,
+      "ActualUnits": 3615,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-06",
+      "ActualMonthLabel": "June 2026",
+      "ChannelID": "CH-NATIONAL-ACCOUNTS",
+      "ChannelName": "National Accounts",
+      "ForecastSnapshotDate": "2026-04-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2929,
+      "ActualUnits": 2977,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-06",
+      "ActualMonthLabel": "June 2026",
+      "ChannelID": "CH-INDEPENDENT-RETAIL",
+      "ChannelName": "Independent Retail",
+      "ForecastSnapshotDate": "2026-04-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2020,
+      "ActualUnits": 2339,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-06",
+      "ActualMonthLabel": "June 2026",
+      "ChannelID": "CH-DESIGNER",
+      "ChannelName": "Designer",
+      "ForecastSnapshotDate": "2026-04-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1414,
+      "ActualUnits": 1701,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-07",
+      "ActualMonthLabel": "July 2026",
+      "ChannelID": "CH-ECOMMERCE",
+      "ChannelName": "E-Commerce",
+      "ForecastSnapshotDate": "2026-05-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3885,
+      "ActualUnits": 3535,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-07",
+      "ActualMonthLabel": "July 2026",
+      "ChannelID": "CH-NATIONAL-ACCOUNTS",
+      "ChannelName": "National Accounts",
+      "ForecastSnapshotDate": "2026-05-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 3045,
+      "ActualUnits": 2911,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-07",
+      "ActualMonthLabel": "July 2026",
+      "ChannelID": "CH-INDEPENDENT-RETAIL",
+      "ChannelName": "Independent Retail",
+      "ForecastSnapshotDate": "2026-05-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 2100,
+      "ActualUnits": 2287,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "ActualMonthID": "2026-07",
+      "ActualMonthLabel": "July 2026",
+      "ChannelID": "CH-DESIGNER",
+      "ChannelName": "Designer",
+      "ForecastSnapshotDate": "2026-05-01",
+      "ForecastLagMonths": 2,
+      "ForecastUnits": 1470,
+      "ActualUnits": 1663,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    }
+  ],
+  "strategicPerformance": [
+    {
+      "MonthID": "2026-02",
+      "MonthLabel": "February 2026",
+      "ABSkuCount": 420,
+      "ABSkuInStockCount": 353,
+      "Trailing12MonthCOGS": 84000000,
+      "AverageInventoryValue": 56000000,
+      "ETAEligiblePOLines": 120,
+      "ETAStablePOLines": 91,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "MonthID": "2026-03",
+      "MonthLabel": "March 2026",
+      "ABSkuCount": 420,
+      "ABSkuInStockCount": 361,
+      "Trailing12MonthCOGS": 86000000,
+      "AverageInventoryValue": 55000000,
+      "ETAEligiblePOLines": 120,
+      "ETAStablePOLines": 93,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "MonthID": "2026-04",
+      "MonthLabel": "April 2026",
+      "ABSkuCount": 420,
+      "ABSkuInStockCount": 365,
+      "Trailing12MonthCOGS": 87000000,
+      "AverageInventoryValue": 54000000,
+      "ETAEligiblePOLines": 120,
+      "ETAStablePOLines": 95,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "MonthID": "2026-05",
+      "MonthLabel": "May 2026",
+      "ABSkuCount": 420,
+      "ABSkuInStockCount": 370,
+      "Trailing12MonthCOGS": 88000000,
+      "AverageInventoryValue": 53000000,
+      "ETAEligiblePOLines": 120,
+      "ETAStablePOLines": 98,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "MonthID": "2026-06",
+      "MonthLabel": "June 2026",
+      "ABSkuCount": 420,
+      "ABSkuInStockCount": 374,
+      "Trailing12MonthCOGS": 89000000,
+      "AverageInventoryValue": 52000000,
+      "ETAEligiblePOLines": 120,
+      "ETAStablePOLines": 101,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    },
+    {
+      "MonthID": "2026-07",
+      "MonthLabel": "July 2026",
+      "ABSkuCount": 420,
+      "ABSkuInStockCount": 378,
+      "Trailing12MonthCOGS": 90000000,
+      "AverageInventoryValue": 51000000,
+      "ETAEligiblePOLines": 120,
+      "ETAStablePOLines": 104,
+      "RecordOrigin": "Generated fictional executive-dashboard demo data"
+    }
+  ],
+  "dashboardConfig": {
+    "Route": "/executive-overview",
+    "NavigationLabel": "Executive Overview",
+    "KPIOrder": [
+      "A/B SKU In-Stock Rate",
+      "Demand Coverage",
+      "Inventory Turns",
+      "Gross Margin at Risk",
+      "PO Lines Requiring Attention"
+    ],
+    "Visuals": [
+      {
+        "VisualID": "VIS-FORECAST-BIAS",
+        "Title": "Forecast Bias Trend",
+        "Type": "Line",
+        "Source": "forecastPerformance"
+      },
+      {
+        "VisualID": "VIS-VENDOR-STATUS",
+        "Title": "Active PO-Line Status by Vendor",
+        "Type": "Stacked Bar",
+        "Source": "Operational PO lines at milestone steps 1–6"
+      },
+      {
+        "VisualID": "VIS-MILESTONE-DISTRIBUTION",
+        "Title": "PO Lines by Current Milestone",
+        "Type": "Horizontal Bar",
+        "Source": "All operational PO lines",
+        "MeasureOptions": [
+          "PO Lines",
+          "Units"
+        ]
+      }
+    ]
+  }
+}

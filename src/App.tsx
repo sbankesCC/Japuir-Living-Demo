@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { ChevronRight, CircleHelp, X } from 'lucide-react';
-import data from './data/generated/controlTowerV2.json';
+import data from './data/generated/controlTowerV3.json';
 import { ResetDemo, SharedHeader } from './SharedHeader';
 import { useDemo } from './DemoContext';
 
@@ -37,7 +37,7 @@ export default function App() {
   const ref = (id?: string) => model.ref.get(String(id))?.DisplayValue || '—'; const vendor = (id: string) => model.vendors.get(id); const owner = (id: string) => model.owner.get(id)?.OwnerName || '—'; const reason = (id?: string) => model.exceptionById.get(String(id))?.ExceptionTypeName || '—';
   const lines: Row[] = useMemo(() => demo.poLines.map((source: Row): Row => {
     const milestone = model.milestoneById.get(source.CurrentMilestoneID); const milestoneStart = rebase(source.MilestoneStartDate, asOf)!; const planned = rebase(source.PlannedETA, asOf)!; const current = rebase(source.CurrentETA, asOf)!; const lastUpdate = rebase(source.LastVendorUpdateDate, asOf)!;
-    const etaVariance = Math.max(0, dayDiff(planned, current)); const atMilestone = Math.max(0, dayDiff(milestoneStart, asOf)); const milestoneVariance = Math.max(0, atMilestone - Number(milestone?.TargetDays || source.TargetDays)); const scheduleVariance = Math.max(etaVariance, milestoneVariance); const delayed = source.CurrentMilestoneID !== 'MS-13' && (source.VendorDelayFlag === 'Yes' || scheduleVariance > 0);
+    const etaVariance = Math.max(0, dayDiff(planned, current)); const atMilestone = Math.max(0, dayDiff(milestoneStart, asOf)); const milestoneVariance = Math.max(0, atMilestone - Number(milestone?.TargetDays || source.TargetDays)); const scheduleVariance = Math.max(etaVariance, milestoneVariance); const delayed = source.CurrentMilestoneID !== 'MS-13' && (source.VendorMilestoneStatus === 'Delayed' || etaVariance > 0 || milestoneVariance > 0);
     const nextUpdate = addDays(lastUpdate, Number(milestone?.UpdateCadenceDays || source.MilestoneUpdateCadenceDays)); const updateDue = source.CurrentMilestoneID !== 'MS-13' && dayDiff(nextUpdate, asOf) >= 0; const dueSoon = source.CurrentMilestoneID !== 'MS-13' && dayDiff(asOf, nextUpdate) >= 1 && dayDiff(asOf, nextUpdate) <= 3; const atRisk = delayed || updateDue;
     const riskPct = delayed ? (scheduleVariance >= 8 ? .6 : scheduleVariance >= 4 ? .35 : .15) : 0; const revenueAtRisk = Math.round(Number(source.Quantity) * Number(source.UnitRevenue) * riskPct * 100) / 100; const overdue = Math.max(0, dayDiff(nextUpdate, asOf));
     const priority = delayed && (scheduleVariance >= 8 || revenueAtRisk >= 50000 || overdue >= 4) ? 'High' : delayed || updateDue ? 'Medium' : dueSoon ? 'Low' : 'None';
